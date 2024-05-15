@@ -237,7 +237,8 @@ def main():
 
     while True:
         # 提供菜单选项
-        print("\n1. Show Directed Graph")
+        print("\nFZM and QXH")
+        print("1. Show Directed Graph")
         print("2. Query Bridge Words")
         print("3. Generate New Text")
         print("4. Calculate Shortest Path")
