@@ -1,6 +1,8 @@
-import networkx as nx  # 仅用于绘图函数
-import matplotlib.pyplot as plt  # 仅用于绘图函数
-import re  # 导入正则表达式库用于文本处理
+import networkx as nx                 # 仅用于绘图函数
+import matplotlib.pyplot as plt       # 仅用于绘图函数
+import scipy as sp
+
+import re      # 导入正则表达式库用于文本处理
 import random  # 导入random库用于生成随机数
 import json
 import heapq
@@ -8,17 +10,13 @@ import heapq
 def preprocess_text(text):
 
     # 使用正则表达式替换非字母字符为空格
-    # 这里的正则表达式 `[^a-zA-Z\s]` 的意思是匹配任何不是英文字母和空白字符的字符。
-    # `[^a-zA-Z]` 表示非英文字母字符，`\s` 表示任何空白字符，所以 `[^a-zA-Z\s]` 就是既不是字母也不是空格的字符。
     text = re.sub(r'[^a-zA-Z\s]', ' ', text)
 
     # 合并多余的空格
     # 正则表达式 `\s+` 匹配一个或多个连续的空白字符（包括空格、制表符、换行符等）。
-    # 替换为一个空格的操作确保了文本中不会出现多余的空格，使文本更整洁，方便后续处理如分词等。
     text = re.sub(r'\s+', ' ', text)
 
-    # 转换文本为小写
-    # `lower()` 函数将文本中的所有大写字母转换为小写字母。
+    # 转换文本为小写 `lower()` 函数将文本中的所有大写字母转换为小写字母。
     return text.lower().strip()
 
 
@@ -81,18 +79,18 @@ def show_directed_graph():
             # 在网络图中添加一条边，起点是 start，终点是 end，权重是 weight
             nx_graph.add_edge(start, end, weight=weight)
 
-    # 使用 spring_layout 方法为网络图的节点生成位置，这种布局算法会试图将边缘长度保持一致并尽量减少边的交叉。
-    pos = nx.spring_layout(nx_graph)
+    # 使用 Kamada-Kawai 布局算法是一种力导向布局算法，用于在图中定位节点。
+    # 它尝试在二维空间中放置节点，以使得图的边尽可能地不重叠，并保持较短的边的长度，以便更清晰地展示图的结构。
+    pos = nx.kamada_kawai_layout(nx_graph)
 
     # 获取网络图中所有边的权重属性，返回一个字典，键是边的元组（起点，终点），值是权重。
     weights = nx.get_edge_attributes(nx_graph, 'weight')
 
     # 使用 draw 函数绘制网络图。参数 pos 定义了节点的位置，with_labels=True 显示节点的标签，node_color 设置节点的颜色。
-    nx.draw(nx_graph, pos, with_labels=True, node_color='lightblue')
-
+    nx.draw(nx_graph, pos, with_labels=True, node_color='skyblue', node_size=1000, edge_color='gray', arrowsize=20,
+            font_size=10, font_weight='bold')
     # 使用 draw_networkx_edge_labels 函数在网络图中的边上显示标签（在这里是权重）。
-    nx.draw_networkx_edge_labels(nx_graph, pos, edge_labels=weights)
-
+    nx.draw_networkx_edge_labels(nx_graph, pos, edge_labels=weights, font_color='red', font_size=8)
     # 显示图形。这会打开一个窗口显示绘制的网络图，是 matplotlib.pyplot 的功能。
     plt.show()
 
@@ -123,8 +121,10 @@ def query_bridge_words(word1, word2):
 def generate_new_text(input_text):
     graph = load_graph_json(GRAPH_FILENAME)
 
+    words = preprocess_text(input_text)
     # 将输入文本按空格分割成单词列表。
-    words = input_text.split()
+    words = words .split()
+
 
     # 初始化新文本，首先添加输入文本的第一个单词。
     new_text = words[0]
@@ -236,8 +236,8 @@ def main():
     save_graph_json(graph, GRAPH_FILENAME)  # 使用 JSON保存图
 
     while True:
-        # 提供菜单选项
-        print("\nFZM and QXH")
+        # 菜单
+        print("\nFZM and QXH   OVO")
         print("1. Show Directed Graph")
         print("2. Query Bridge Words")
         print("3. Generate New Text")

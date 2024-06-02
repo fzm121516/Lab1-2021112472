@@ -1,0 +1,33 @@
+{
+    "to": {
+        "explore": 1,
+        "seek": 1
+    },
+    "explore": {
+        "strange": 1
+    },
+    "strange": {
+        "new": 1
+    },
+    "new": {
+        "worlds": 1,
+        "life": 1,
+        "civilizations": 1
+    },
+    "worlds": {
+        "to": 1
+    },
+    "seek": {
+        "out": 1
+    },
+    "out": {
+        "new": 1
+    },
+    "life": {
+        "and": 1
+    },
+    "and": {
+        "new": 1
+    },
+    "civilizations": {}
+}
