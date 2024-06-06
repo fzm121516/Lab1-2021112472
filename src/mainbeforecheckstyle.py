@@ -87,7 +87,7 @@ def show_directed_graph():
     weights = nx.get_edge_attributes(nx_graph, 'weight')
 
     # 使用 draw 函数绘制网络图。参数 pos 定义了节点的位置，with_labels=True 显示节点的标签，node_color 设置节点的颜色。
-    nx.draw(nx_graph, pos, with_labels=True, node_color='skyblue', node_size=1000, edge_color='gray', arrowsize=20,
+    nx.draw(nx_graph, pos, with_labels=True, node_color='skyblue', node_size=1000, edge_color='gray', arrowsize=10,
             font_size=10, font_weight='bold')
     # 使用 draw_networkx_edge_labels 函数在网络图中的边上显示标签（在这里是权重）。
     nx.draw_networkx_edge_labels(nx_graph, pos, edge_labels=weights, font_color='red', font_size=8)
