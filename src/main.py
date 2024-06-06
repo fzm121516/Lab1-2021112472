@@ -112,6 +112,8 @@ def show_directed_graph():
 def query_bridge_words(word1, word2):
     """查询桥接词"""
     graph = load_graph_json(GRAPH_FILENAME)
+    if word1 == "" or word2 == "":
+        return "Word1 and word2 cannot be empty!"
 
     # 检查输入的两个单词是否都在图中。如果任意一个单词不在图中，则返回包含这些单词名称的错误信息。
     if word1 not in graph or word2 not in graph:
