@@ -12,7 +12,7 @@
     "new": {
         "worlds": 1,
         "life": 1,
-        "civilizations": 1
+        "earlier": 1
     },
     "worlds": {
         "to": 1
@@ -28,6 +28,9 @@
     },
     "and": {
         "new": 1
+    },
+    "earlier": {
+        "civilizations": 1
     },
     "civilizations": {}
 }

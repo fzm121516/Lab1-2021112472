@@ -115,6 +115,9 @@ def query_bridge_words(word1, word2):
     if word1 == "" or word2 == "":
         return "Word1 and word2 cannot be empty!"
 
+    if not word1.isalpha() or not word2.isalpha():
+        return "Word1 and word2 should only contain English letters!"
+
     # 检查输入的两个单词是否都在图中。如果任意一个单词不在图中，则返回包含这些单词名称的错误信息。
     if word1 not in graph or word2 not in graph:
         missing_words = []
@@ -172,41 +175,30 @@ def generate_new_text(input_text):
 def calc_shortest_path(word1, word2):
     """最短路径计算"""
     graph = load_graph_json(GRAPH_FILENAME)
-
     # 检查起点和终点是否在图中
     if word1 not in graph or word2 not in graph:
         missing_words = [word for word in [word1, word2] if word not in graph]
-        return "No " + \
-            ", ".join(['\"' + word + '\"' for word in missing_words]) + \
-            " in the graph!"
+        return "No " + ", ".join(['\"' + word + '\"' for word in missing_words]) + " in the graph!"
     # 使用优先队列（堆）来实现 Dijkstra 算法
     # 队列中存储的元素是一个元组，(累积的路径长度, 当前的单词, 路径)
     priority_queue = []
     heapq.heappush(priority_queue, (0, word1, [word1]))
-
     # 用于记录到每个节点的最短路径长度
     distances = {word1: 0}
-
     # 当队列不为空时，循环执行
     while priority_queue:
         # 弹出累积权重最小的元素
         current_distance, current, path = heapq.heappop(priority_queue)
-
         # 如果当前节点是目标单词，返回路径及路径权重
         if current == word2:
-            return f"Shortest path: {' -> '.join(path)}\n" \
-                   f"Path weight: {current_distance}"
-
+            return f"Shortest path: {' -> '.join(path)}\n" f"Path weight: {current_distance}"
         # 遍历当前节点的所有邻居
         for neighbor, weight in graph[current].items():
             distance = current_distance + weight
-
             # 如果当前路径到邻居的距离更短，或邻居尚未被访问
             if neighbor not in distances or distance < distances[neighbor]:
                 distances[neighbor] = distance
-                heapq.heappush(priority_queue,
-                               (distance, neighbor, path + [neighbor]))
-
+                heapq.heappush(priority_queue,(distance, neighbor, path + [neighbor]))
     # 如果找不到从起点到终点的路径
     return f"No path from \"{word1}\" to \"{word2}\""
 
