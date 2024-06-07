@@ -1,5 +1,9 @@
 import pytest
+import sys
+
+sys.path.append("C:/fzm2024/fzmLab1/Lab1_2021112472");
 from src.main import query_bridge_words
+
 
 @pytest.mark.parametrize(
     "word1, word2, expected_result",

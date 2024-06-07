@@ -8,7 +8,7 @@ import heapq
 import networkx as nx  # 仅用于绘图函数
 import matplotlib.pyplot as plt  # 仅用于绘图函数
 
-GRAPH_FILENAME = 'C:/fzm2024/fzmLab1/Lab1-2021112472/data/graph.json'
+GRAPH_FILENAME = 'C:/fzm2024/fzmLab1/Lab1_2021112472/data/graph.json'
 
 
 def preprocess_text(text):
@@ -247,7 +247,7 @@ def random_walk():
 def main():
     """main"""
     # file_path = input("Enter the path to the text file: ")  # 输入文件路径
-    file_path = 'C:/fzm2024/fzmLab1/Lab1-2021112472/data/test1.txt'
+    file_path = 'C:/fzm2024/fzmLab1/Lab1_2021112472/data/test1.txt'
 
     with open(file_path, 'r', encoding="utf-8") as file:
         text = file.read()  # 读取文件内容
